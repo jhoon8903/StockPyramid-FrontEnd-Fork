@@ -5,12 +5,15 @@ import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import MainCard from "../Components/MainCard";
+import { useParams } from "react-router";
 
 import { io } from "socket.io-client";
 const socket = io.connect("http://localhost:3001/raffles");
 
 function BidStates() {
   const [amount, setAmount] = useState("");
+  const id = useParams().raffleId;
+  console.log(id);
   const [exportAmount, setExportAmount] = useState("");
   const userId = localStorage.getItem("userId");
   console.log("로컬스토리지 겟", userId);
@@ -18,7 +21,7 @@ function BidStates() {
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       setExportAmount(Number(amount).toLocaleString());
-      socket.emit("bidding", { amount: amount, user: userId });
+      socket.emit("bidding", { amount: amount, user: userId, raffleId: id });
 
       // emit a socket event to the server
     }
