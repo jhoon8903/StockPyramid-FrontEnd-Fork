@@ -36,8 +36,11 @@ export default function Login() {
       )
       .then(function (response) {
         localStorage.setItem("token", response.headers.authorization);
-        localStorage.setItem("userId", response.data);
-        console.log("로그인 res.data", response.data);
+
+        localStorage.setItem("userId", response.data.usersId);
+        console.log("로그인 res.data", response.data.usersId);
+
+
         navigate("/main");
       })
       .catch(function (error) {
@@ -55,7 +58,8 @@ export default function Login() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-          }}>
+          }}
+        >
           <Typography component="h1" variant="h5">
             Login
           </Typography>
@@ -63,7 +67,8 @@ export default function Login() {
             component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1 }}>
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -88,7 +93,8 @@ export default function Login() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}>
+              sx={{ mt: 3, mb: 2 }}
+            >
               Sign In
             </Button>
           </Box>
