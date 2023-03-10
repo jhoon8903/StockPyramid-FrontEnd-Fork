@@ -36,8 +36,10 @@ export default function Login() {
       )
       .then(function (response) {
         localStorage.setItem("token", response.headers.authorization);
+
         localStorage.setItem("userId", response.data.usersId);
         console.log("로그인 res.data", response.data.usersId);
+
 
         navigate("/main");
       })
@@ -87,7 +89,6 @@ export default function Login() {
               id="password"
               autoComplete="current-password"
             />
-            {/* <Link to="/main"> */}
             <Button
               type="submit"
               fullWidth
@@ -96,7 +97,6 @@ export default function Login() {
             >
               Sign In
             </Button>
-            {/* </Link> */}
           </Box>
         </Box>
       </Container>
